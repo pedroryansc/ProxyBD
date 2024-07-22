@@ -6,6 +6,12 @@ public class Produto {
 	private String descricao;
 	private double preco;
 	
+	public Produto(int id, String descricao, double preco) {
+		setId(id);
+		setDescricao(descricao);
+		setPreco(preco);
+	}
+	
 	public int getId() {
 		return id;
 	}
