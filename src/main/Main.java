@@ -10,5 +10,7 @@ public class Main {
 		
 		consulta.procurarProd(1);
 		
+		consulta.verificarTempo();
+		
 	}
 }
