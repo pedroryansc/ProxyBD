@@ -9,6 +9,7 @@ import interfaces.Consulta;
 
 public class ProdutoDAO implements Consulta {
 
+	@Override
 	public Produto procurarProd(int id) {
 		try {
 			Connection conn = Conexao.conectar();

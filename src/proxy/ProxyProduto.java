@@ -3,6 +3,8 @@ package proxy;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import interfaces.Consulta;
 import produto.Produto;
@@ -42,15 +44,18 @@ public class ProxyProduto implements Consulta {
 	}
 	
 	public void verificarTempo() {
-		while(!(listaProds.isEmpty())) {
-			for(int i = 0; i < listaProds.size(); i++) {
-				if(System.currentTimeMillis() - 15000 >= listaTempo.get(i).getTime()) { // Verifica se o tempo limite foi atingido
-					System.out.println("Removido: " + listaProds.get(i));
-					listaProds.remove(i);
-					listaTempo.remove(i);
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				System.out.println(new Timestamp(System.currentTimeMillis()));
+				for(int i = 0; i < listaProds.size(); i++) {
+					if(System.currentTimeMillis() - 15000 >= listaTempo.get(i).getTime()) { // Verifica se o tempo limite foi atingido
+						System.out.println("Removido: " + listaProds.get(i));
+						listaProds.remove(i);
+						listaTempo.remove(i);
+					}
 				}
 			}
-		}
+		}, 0, 1000);
 	}
-
 }
