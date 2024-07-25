@@ -8,7 +8,7 @@ public class Conexao {
 	public static Connection conectar() {
 		try {
 			String url = "jdbc:mysql://localhost/lojinha";
-			return DriverManager.getConnection(url, "root", "Sobaoeim123#");
+			return DriverManager.getConnection(url, "root", "");
 		} catch(Exception e) {
 			System.out.println("Erro: " + e.toString());
 			e.printStackTrace();

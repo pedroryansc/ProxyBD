@@ -22,7 +22,7 @@ public class ProxyProduto implements Consulta {
 		
 		for(int i = 0; i < listaProds.size(); i++) {
 			if(listaProds.get(i).getId() == id) {
-				listaTempo.get(i).setTime(System.currentTimeMillis()); // Reinicia o tempo do produto na memória cache
+				listaTempo.get(i).setTime(System.currentTimeMillis()); // Reinicia o tempo do produto no cache
 				System.out.println("Proxy: " + listaProds.get(i));
 				return listaProds.get(i);
 			}
