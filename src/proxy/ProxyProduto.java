@@ -47,10 +47,9 @@ public class ProxyProduto implements Consulta {
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				System.out.println(new Timestamp(System.currentTimeMillis()));
 				for(int i = 0; i < listaProds.size(); i++) {
 					if(System.currentTimeMillis() - 15000 >= listaTempo.get(i).getTime()) { // Verifica se o tempo limite foi atingido
-						System.out.println("Removido: " + listaProds.get(i));
+						System.out.println("\n--- Removido do cache: " + listaProds.get(i) + " ---");
 						listaProds.remove(i);
 						listaTempo.remove(i);
 					}
