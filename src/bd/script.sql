@@ -8,3 +8,6 @@ CREATE TABLE produto(
     preco decimal(10, 2) NOT NULL,
     PRIMARY KEY (id)
 );
+
+INSERT INTO produto (descricao, preco) VALUES ("Toddynho", 0.99);
+INSERT INTO produto (descricao, preco) VALUES ("Nescau Cereal Radical", 10);

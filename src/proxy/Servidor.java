@@ -24,7 +24,7 @@ public class Servidor {
 		        ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
 		        
 		        int id = (int) entrada.readObject();
-		        System.out.println(id);
+		        System.out.println("ID enviado: " + id);
 		        
 		        Produto prod = proxy.procurarProd(id);
 		        

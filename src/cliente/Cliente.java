@@ -11,25 +11,32 @@ import produto.Produto;
 public class Cliente {
 	public static void main(String[] args) {
 		try {
-	    	Socket cliente = new Socket(InetAddress.getByName("192.168.100.7"), 1234);
-	    	
 	    	Scanner scanner = new Scanner(System.in);
+	    	int idScan;
 	    	
-	    	ObjectOutputStream entrada = new ObjectOutputStream(cliente.getOutputStream());
-	    	entrada.flush();
-	    	
-	    	System.out.println("Insira o ID do produto para consultá-lo:");
-	    	entrada.writeObject(scanner.nextInt());
-
-	    	ObjectInputStream saida = new ObjectInputStream(cliente.getInputStream());
-	    	Produto prod = (Produto) saida.readObject();
-	    	System.out.println("Produto recebido: " + prod + "\n");
+	    	do {
+	    		Socket cliente = new Socket(InetAddress.getByName("192.168.100.7"), 1234);
+	    		
+	    		System.out.println("Insira o ID do produto para consultá-lo (ou qualquer número menor que zero para encerrar):");
+		    	idScan = scanner.nextInt();
+		    	
+		    	if (idScan > 0) {
+		    		ObjectOutputStream entrada = new ObjectOutputStream(cliente.getOutputStream());
+			    	entrada.flush();
+			    	entrada.writeObject(idScan);
+			    	
+			    	ObjectInputStream saida = new ObjectInputStream(cliente.getInputStream());
+			    	Produto prod = (Produto) saida.readObject();
+			    	System.out.println("Produto recebido: " + prod + "\n");
+			    	
+			    	entrada.close();
+			    	saida.close();
+		    	}   	
+	    	} while (idScan > 0);
 	    	
 	    	scanner.close();
-	    	entrada.close();
-	    	saida.close();
 	    	
-	    	System.out.println("Conexão encerrada");
+	    	System.out.println("\nConexão encerrada");
 	    } catch(Exception e) {
 	    	System.out.println("Erro: " + e.getMessage());
 	    }
