@@ -24,17 +24,21 @@ public class Servidor {
 		        ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
 		        
 		        int id = (int) entrada.readObject();
-		        System.out.println("ID enviado: " + id);
 		        
-		        Produto prod = proxy.procurarProd(id);
-		        
-		        ObjectOutputStream saida = new ObjectOutputStream(cliente.getOutputStream());
-		        saida.flush();
-		        saida.writeObject(prod);
-		        
+		        if(id > 0) {
+			        System.out.println("ID enviado: " + id);
+			        
+			        Produto prod = proxy.procurarProd(id);
+			        
+			        ObjectOutputStream saida = new ObjectOutputStream(cliente.getOutputStream());
+			        saida.flush();
+			        saida.writeObject(prod);
+
+			        saida.close();
+			        cliente.close();
+		        }
+
 		        entrada.close();
-		        saida.close();
-		        cliente.close();
 		    }
 		} catch(Exception e) {
 			System.out.println("Erro: " + e.getMessage());
