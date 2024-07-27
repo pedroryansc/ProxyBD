@@ -17,29 +17,29 @@ public class Servidor {
 			proxy.verificarTempo();
 			
 			System.out.println("Servidor ouvindo a porta 1234");
-		    while(true) {
-		    	Socket cliente = servidor.accept();
-		        System.out.println("\nCliente conectado: " + cliente.getInetAddress().getHostAddress());
-		        
-		        ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
-		        
-		        int id = (int) entrada.readObject();
-		        
-		        if(id > 0) {
-			        System.out.println("ID enviado: " + id);
-			        
-			        Produto prod = proxy.procurarProd(id);
-			        
-			        ObjectOutputStream saida = new ObjectOutputStream(cliente.getOutputStream());
-			        saida.flush();
-			        saida.writeObject(prod);
-
-			        saida.close();
-			        cliente.close();
-		        }
-
-		        entrada.close();
-		    }
+			while(true) {
+				Socket cliente = servidor.accept();
+				System.out.println("\nCliente conectado: " + cliente.getInetAddress().getHostAddress());
+				
+				ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
+				
+				int id = (int) entrada.readObject();
+				
+				if(id > 0) {
+					System.out.println("ID enviado: " + id);
+					
+					Produto prod = proxy.procurarProd(id);
+					
+					ObjectOutputStream saida = new ObjectOutputStream(cliente.getOutputStream());
+					saida.flush();
+					saida.writeObject(prod);
+					
+					saida.close();
+					cliente.close();
+				}
+				
+				entrada.close();
+			}
 		} catch(Exception e) {
 			System.out.println("Erro: " + e.getMessage());
 		}
